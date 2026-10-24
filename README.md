@@ -9,6 +9,7 @@
 **把商品资料，变成视觉统一的亚马逊七图与 A+ 图片。**
 
 [![Codex Skill](https://img.shields.io/badge/Codex-Skill-111827?style=flat-square)](SKILL.md)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue?style=flat-square)](LICENSE)
 [![19 Assets](https://img.shields.io/badge/Default-19%20Images-0d9488?style=flat-square)](#默认交付)
 [![Validation](https://github.com/sanshiliu-studio/create-amazon-listing-images/actions/workflows/validate.yml/badge.svg)](https://github.com/sanshiliu-studio/create-amazon-listing-images/actions/workflows/validate.yml)
 [![Website](https://img.shields.io/badge/作者-三十六-6366f1?style=flat-square)](https://sanshiliu.com/)
@@ -170,6 +171,16 @@ python -B -X utf8 -m unittest discover -s tests -v
 ```
 
 仓库不包含个人商品实拍、生成结果或客户资料；本地 `outputs/` 默认忽略。用户自行生成的文件留在自己的项目中。
+
+## 开源许可证
+
+Copyright (c) 2026 三十六 · [sanshiliu.com](https://sanshiliu.com/)
+
+本项目原创的技能指令、脚本、测试、文档及视觉素材采用 **GNU Affero General Public License v3.0 only**（SPDX：`AGPL-3.0-only`），完整条款见 [LICENSE](LICENSE)。
+
+允许商用、修改和再分发，须保留版权及许可声明。分发受许可作品或修改版本时，应按许可证履行相应源码等义务；如果修改版本支持用户通过网络远程交互，须向这些用户显著提供免费获取该版本相应源码的机会。以上为简要说明，具体以许可证全文为准。
+
+引用的 Amazon 规范原文、第三方商标及其他第三方材料仍归原权利人所有，不因收录于本仓库而改用本许可证。使用本技能生成的图片不会仅因使用本技能而自动适用 AGPL；输入素材和生成工具的适用条款仍需遵守。
 
 ## 使用边界
 

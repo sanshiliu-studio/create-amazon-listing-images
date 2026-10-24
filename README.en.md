@@ -7,6 +7,7 @@
 **A shared visual system for product galleries and desktop/mobile A+ images.**
 
 [![Codex Skill](https://img.shields.io/badge/Codex-Skill-111827?style=flat-square)](SKILL.md)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue?style=flat-square)](LICENSE)
 [![19 Assets](https://img.shields.io/badge/Default-19%20Images-0d9488?style=flat-square)](#default-deliverables)
 [![Validation](https://github.com/sanshiliu-studio/create-amazon-listing-images/actions/workflows/validate.yml/badge.svg)](https://github.com/sanshiliu-studio/create-amazon-listing-images/actions/workflows/validate.yml)
 
@@ -121,6 +122,18 @@ python -B -X utf8 -m unittest discover -s tests -v
 Personal product images, generation outputs, and customer records are excluded. Local `outputs/` is ignored.
 
 These export sizes and creative rules are project defaults, not a claim that every Amazon module has the same requirements. Current category rules and platform review remain separate. This independent project is not endorsed by Amazon or OpenAI.
+
+---
+
+## License
+
+Copyright (c) 2026 三十六 · [sanshiliu.com](https://sanshiliu.com/)
+
+The project's original skill instructions, scripts, tests, documentation, and visual assets are licensed under the **GNU Affero General Public License v3.0 only** (SPDX: `AGPL-3.0-only`). See [LICENSE](LICENSE) for the full terms.
+
+Commercial use, modification, and redistribution are permitted subject to the license, including preservation of copyright and license notices and applicable Corresponding Source obligations when conveying covered works or modified versions. If a modified version supports remote interaction over a computer network, it must prominently offer those users an opportunity to receive that version's Corresponding Source at no charge. This summary does not replace the full license.
+
+Quoted Amazon policies, third-party trademarks, and other third-party materials remain the property of their respective rights holders and are not relicensed by their inclusion here. Images are not automatically subject to the AGPL merely because this skill was used to generate them; applicable input-material and generation-tool terms still apply.
 
 ---
 
