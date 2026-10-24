@@ -1,0 +1,14 @@
+# Product references, generated images and per-product working records stay local.
+/outputs/
+/__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+Thumbs.db
+.DS_Store
+*.log

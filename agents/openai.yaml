@@ -1,0 +1,4 @@
+interface:
+  display_name: "亚马逊商品七图与A+图片"
+  short_description: "默认成套制作美国站七图与六组A+双端图，共十九张，统一视觉并支持指定修订"
+  default_prompt: "使用 $create-amazon-listing-images，根据以下商品资料制作 Amazon 美国站七张图库图与六组 A+ 双端图，默认共十九张，共用一套视觉规范；若我明确限定范围则按指定范围执行："

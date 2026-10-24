@@ -1,0 +1,2 @@
+# Tested file-audit dependency. Image generation uses the current session's tools.
+Pillow==12.3.0
