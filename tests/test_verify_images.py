@@ -123,6 +123,30 @@ class AuditTests(unittest.TestCase):
         self.assertFalse(report['pixel_passed'])
         self.assertTrue(report['delivery_passed'])
 
+    def test_accepted_native_portrait_keeps_actual_pixels(self):
+        report = self.check_images(fixtures(size=(1086, 1448)), category='fashion', gallery_resolution='native')
+        self.assertTrue(report['passed'])
+        self.assertEqual(report['gallery_resolution'], 'native')
+        self.assertEqual((report['images'][0]['width'], report['images'][0]['height']), (1086, 1448))
+
+    def test_native_gallery_keeps_format_and_color_requirements(self):
+        report = self.check_images(fixtures(size=(1086, 1448), mode='CMYK', fmt='JPEG', profile='none'),
+                                   category='fashion', gallery_resolution='native')
+        self.assertTrue(report['pixel_passed'])
+        self.assertFalse(report['delivery_passed'])
+
+    def test_native_gallery_keeps_category_aspect_requirement(self):
+        report = self.check_images(fixtures(size=(1086, 1448)), category='other', gallery_resolution='native')
+        self.assertFalse(report['pixel_passed'])
+
+    def test_native_gallery_does_not_relax_aplus_size(self):
+        report = self.check_images(fixtures(size=(1086, 1448)), aplus_layout='desktop', gallery_resolution='native')
+        self.assertFalse(report['pixel_passed'])
+
+    def test_gallery_resolution_rejects_unknown_policy(self):
+        with self.assertRaises(ValueError):
+            self.check_images(gallery_resolution='unknown')
+
     def test_fashion_must_be_portrait(self):
         self.assertFalse(self.check_images(category='fashion')['passed'])
         self.assertTrue(self.check_images(fixtures(size=(2048, 2731)), category='fashion')['passed'])

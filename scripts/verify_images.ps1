@@ -10,6 +10,8 @@ param(
     [string[]]$SyntheticPerformerImages,
     [ValidateSet('desktop', 'mobile')]
     [string]$AplusLayout,
+    [ValidateSet('high', 'native')]
+    [string]$GalleryResolution = 'high',
     [Parameter(Position = 0, ValueFromRemainingArguments = $true)]
     [string[]]$Images
 )
@@ -74,6 +76,7 @@ if (-not $Images -or $Images.Count -eq 0) {
 $scriptPath = Join-Path $PSScriptRoot 'verify_images.py'
 $auditArgs = @($selected.Prefix) + @('-B', '-X', 'utf8', $scriptPath, '--category', $Category, '--expected-count', [string]$ExpectedCount)
 if ($AplusLayout) { $auditArgs += @('--aplus-layout', $AplusLayout) }
+if (-not $AplusLayout) { $auditArgs += @('--gallery-resolution', $GalleryResolution) }
 foreach ($performerImage in $SyntheticPerformerImages) { $auditArgs += @('--synthetic-performer', $performerImage) }
 $auditArgs += @('--') + @($Images)
 & $selected.Command @auditArgs

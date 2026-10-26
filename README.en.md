@@ -25,12 +25,12 @@ A Codex skill for planning, generating, revising, and reviewing Amazon US produc
 
 | Asset | Count | Specification |
 |---|---:|---|
-| Product gallery | 7 | 1 main image + 6 secondary images; non-fashion target 2560×2560, fashion target 2304×3072; shortest side strictly above 2000px |
+| Product gallery | 7 | 1 main image + 6 secondary images; preferred targets: non-fashion 2560×2560, fashion 2304×3072; native outputs including 1086×1448 are also accepted by default |
 | A+ desktop | 6 | 1464×600 each |
 | A+ mobile | 6 | 600×450 each, with a dedicated layout |
 | Total | **19** | Shared product facts, colors, lighting, materials, typography, and scene direction |
 
-New production requests include both sets unless the user explicitly limits the scope. Partial revisions and requests to supplement an existing set preserve unrelated images. Missing evidence or unavailable output capabilities remain visible as incomplete items.
+New production requests include both sets unless the user explicitly limits the scope. Partial revisions preserve unrelated images. Native gallery resolution is already accepted: continue without repeatedly asking for preview approval or automatically upscaling. Missing evidence, failed A+ requirements, or separately requested hard requirements remain visible as incomplete items.
 
 ## Key rules
 
@@ -91,17 +91,17 @@ For a limited task, explicitly request gallery-only, A+-only, content planning w
 
 ## Validation
 
-Verify the actual gallery output and the first desktop/mobile A+ pair before scaling up their respective production paths. Capability failures allow at most 1 materially different, supported correction; repeated failures are reported rather than hidden.
+Read the first gallery image's actual dimensions and review its category aspect, product, and clarity, then continue at the accepted native resolution without another approval. A shortest side above 2000px remains a preferred goal rather than a default stop condition. The first desktop/mobile A+ pair must still meet its fixed sizes. Failed A+ or separately requested hard requirements allow at most 1 materially different, supported correction.
 
 Run these examples from the repository directory with actual image paths:
 
 ```sh
-python -B -X utf8 scripts/verify_images.py --category other --expected-count 1 gallery-01.jpg
+python -B -X utf8 scripts/verify_images.py --category other --gallery-resolution native --expected-count 1 gallery-01.jpg
 python -B -X utf8 scripts/verify_images.py --category other --aplus-layout desktop --expected-count 1 A01-desktop.jpg
 python -B -X utf8 scripts/verify_images.py --category other --aplus-layout mobile --expected-count 1 A01-mobile.jpg
 ```
 
-Use separate batches for a complete set: gallery count 7, desktop count 6, mobile count 6. Add `--synthetic-performer <path>` for every applicable AI-person file in the current batch.
+Use separate batches for a complete set: gallery count 7, desktop count 6, mobile count 6. The skill uses `--gallery-resolution native` by default; choose `high` only for an explicitly requested shortest side above 2000px. Omitting the flag retains the legacy high-resolution check for compatibility. A+ dimensions are unaffected. Add `--synthetic-performer <path>` for every applicable AI-person file in the current batch.
 
 Checks include dimensions, actual format and matching suffix, sampled ICC behavior or valid PNG sRGB declarations, transparency, animation, byte/exact-pixel duplicates, and required disclosure metadata. A+ also requires a file below 2,000,000 bytes and declared DPI of at least 72 in both directions.
 

@@ -30,12 +30,12 @@
 
 | 图片类型 | 数量 | 规格与内容 |
 |---|---:|---|
-| 商品图库 | **7** | 1 张白底主图＋6 张副图；非时尚类目标 2560×2560，时尚类目标 2304×3072；短边严格大于 2000px |
+| 商品图库 | **7** | 1 张白底主图＋6 张副图；优先目标为非时尚类2560×2560、时尚类2304×3072；默认也接受1086×1448等原生规格 |
 | A+ 桌面版 | **6** | 每张 **1464×600** |
 | A+ 移动版 | **6** | 每张 **600×450**，重新排版 |
 | 合计 | **19** | 共用商品事实、配色、光线、材质、字体与场景气质 |
 
-没有限定范围的新制作任务，默认同时制作 2 套。明确要求只做图库、只做 A+、补图、单张或局部修改时，仅执行指定范围。缺资料或工具无法达标时如实记录未完成项，不降低规格凑数。
+没有限定范围的新制作任务，默认同时制作2套。明确要求只做图库、只做A+、补图、单张或局部修改时，仅执行指定范围。图库已默认接受原生分辨率，不再重复询问是否接受预览，也不为凑像素自动放大；缺资料、A+或另行指定的硬指标无法完成时如实记录未完成项。
 
 ## 为什么做成一套
 
@@ -134,7 +134,7 @@ flowchart LR
     F --> G[分批文件验收与交付清单]
 ```
 
-先用图库首张和 A+ 首组双端的实际文件验证对应输出能力与风格。尺寸不达标仅在有受支持的不同方案时纠正 1 次，同类能力限制不反复重试；可行路径继续，受限部分明确记录。
+图库首张记录实际像素并核对画幅、商品和清晰度，原生规格直接继续整套。A+首组双端仍按指定尺寸验收；A+或另行明确的硬指标失败仅在有受支持的不同方案时纠正1次。短边大于2000px为图库优先目标，不再是默认停工或确认门槛。
 
 ### 文件验收示例
 
@@ -142,14 +142,14 @@ flowchart LR
 
 ```sh
 # 商品图库单张；整套使用 --expected-count 7 并传入 7 个文件
-python -B -X utf8 scripts/verify_images.py --category other --expected-count 1 gallery-01.jpg
+python -B -X utf8 scripts/verify_images.py --category other --gallery-resolution native --expected-count 1 gallery-01.jpg
 
 # A+ 分桌面、移动分别检查；默认整套每端 6 张
 python -B -X utf8 scripts/verify_images.py --category other --aplus-layout desktop --expected-count 1 A01-desktop.jpg
 python -B -X utf8 scripts/verify_images.py --category other --aplus-layout mobile --expected-count 1 A01-mobile.jpg
 ```
 
-含 AI 人物/人体的文件另加 `--synthetic-performer <该图路径>`。Windows 写入方法见 [人物元数据标记](references/synthetic-performer.md)。
+图库默认使用 `--gallery-resolution native`；只有本次明确要求短边大于2000px时才用 `high`。为兼容旧调用，省略参数仍执行旧的高分辨率检查。A+指定尺寸不受该参数影响。含AI人物/人体的文件另加 `--synthetic-performer <该图路径>`。Windows写入方法见 [人物元数据标记](references/synthetic-performer.md)。
 
 文件检查包含真实尺寸、格式与后缀、色彩配置、透明像素、静态帧、字节与精确像素去重，以及指定人物图的披露标签。A+ 另查文件小于 **2,000,000 字节**、双向 DPI 至少 **72**。
 

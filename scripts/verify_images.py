@@ -91,9 +91,11 @@ def performer_metadata(image, required):
             'passed': present if required else None}
 
 
-def audit(paths, category, expected_count=7, synthetic_performer_paths=None, aplus_layout=None):
+def audit(paths, category, expected_count=7, synthetic_performer_paths=None, aplus_layout=None, gallery_resolution='high'):
     if category not in ('fashion', 'other'):
         raise ValueError('category must be fashion or other')
+    if gallery_resolution not in ('high', 'native'):
+        raise ValueError('gallery_resolution must be high or native')
     if aplus_layout is not None and aplus_layout not in APLUS_SIZES:
         raise ValueError('aplus_layout must be desktop, mobile or None')
     if not isinstance(expected_count, int) or isinstance(expected_count, bool) or expected_count < 1:
@@ -156,7 +158,7 @@ def audit(paths, category, expected_count=7, synthetic_performer_paths=None, apl
                     if not valid_dpi:
                         delivery_errors.append('A+ export must declare at least 72 DPI in both directions')
                 else:
-                    if min(width, height) <= 2000:
+                    if gallery_resolution == 'high' and min(width, height) <= 2000:
                         pixel_errors.append('Shortest side must be strictly greater than 2000px')
                     if category == 'fashion' and height <= width:
                         pixel_errors.append('Fashion image must be portrait')
@@ -194,6 +196,7 @@ def audit(paths, category, expected_count=7, synthetic_performer_paths=None, apl
         'pixel_passed': pixel_passed, 'delivery_passed': delivery_passed,
         'category': category, 'expected_count': expected_count, 'actual_count': len(paths),
         'profile': 'aplus' if aplus_layout else 'gallery', 'aplus_layout': aplus_layout,
+        'gallery_resolution': None if aplus_layout else gallery_resolution,
         'errors': errors, 'images': rows,
         'scope': 'File checks only. ICC behavior is sampled against sRGB; this does not prove prior color-conversion accuracy. Pixel deduplication detects exact decoded matches, not similar compositions. Product truth, white background, faces, text, IP and platform rules require visual review.',
     }
@@ -208,12 +211,14 @@ def main():
                         help='AI-person image requiring metadata; repeat for each applicable file')
     parser.add_argument('--aplus-layout', choices=tuple(APLUS_SIZES),
                         help='Use the fixed A+ desktop/mobile export contract instead of gallery dimensions')
+    parser.add_argument('--gallery-resolution', choices=('high', 'native'), default='high',
+                        help='native accepts actual gallery pixels without a minimum-side gate; high retains the legacy >2000px check. A+ sizes are unaffected')
     parser.add_argument('images', nargs='+', type=Path)
     args = parser.parse_args()
     if args.expected_count < 1:
         parser.error('--expected-count must be positive')
     try:
-        report = audit(args.images, args.category, args.expected_count, args.synthetic_performer, args.aplus_layout)
+        report = audit(args.images, args.category, args.expected_count, args.synthetic_performer, args.aplus_layout, args.gallery_resolution)
     except ValueError as exc:
         parser.error(str(exc))
     print(json.dumps(report, ensure_ascii=False, indent=2))

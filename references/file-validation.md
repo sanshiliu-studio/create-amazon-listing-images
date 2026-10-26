@@ -16,30 +16,32 @@ Windows 示例（在技能目录执行，尖括号内容须替换为实际值）
 .\scripts\verify_images.ps1 -CheckEnvironment -PythonPath '<工具返回的Python完整路径>'
 
 # 整套七张：明确列出七个实际文件路径
-.\scripts\verify_images.ps1 -Category fashion -ExpectedCount 7 -Images @('<图01>', '<图02>', '<图03>', '<图04>', '<图05>', '<图06>', '<图07>')
+.\scripts\verify_images.ps1 -Category fashion -GalleryResolution native -ExpectedCount 7 -Images @('<图01>', '<图02>', '<图03>', '<图04>', '<图05>', '<图06>', '<图07>')
 
 # 只做或修改一张
-.\scripts\verify_images.ps1 -Category other -ExpectedCount 1 -Images @('<本次图片>')
+.\scripts\verify_images.ps1 -Category other -GalleryResolution native -ExpectedCount 1 -Images @('<本次图片>')
 
 # 两张局部修订
-.\scripts\verify_images.ps1 -Category fashion -ExpectedCount 2 -Images @('<修订图03>', '<修订图06>')
+.\scripts\verify_images.ps1 -Category fashion -GalleryResolution native -ExpectedCount 2 -Images @('<修订图03>', '<修订图06>')
 ```
 
 其他系统或已确认 Python 环境可以直接运行：
 
 ```text
-<已验证的Python> -B -X utf8 scripts/verify_images.py --category other --expected-count 1 <本次图片路径>
+<已验证的Python> -B -X utf8 scripts/verify_images.py --category other --gallery-resolution native --expected-count 1 <本次图片路径>
 ```
 
 Windows 遇到脚本执行策略限制时直接使用已验证的 Python 命令，不更改系统执行策略。退出码：`0` 为本次文件检查通过，`1` 为文件未达标，`2` 为环境/命令参数错误；保留具体原因，不把非零退出码一律当作脚本故障。
 
 ## 两项结果分别解读
 
-下表的像素门槛用于商品图库。A+ 按 [A+ 双端图片流程](aplus-images.md) 传入 `-AplusLayout desktop/mobile`（Python 为 `--aplus-layout`），改用桌面 1464×600、移动 600×450 的精确导出目标，并检查最终文件小于 2,000,000 字节、双向 DPI 至少 72。其余色彩、透明像素和人物披露检查仍生效；两种模式不可混用。
+图库默认明确传入 `--gallery-resolution native`（Windows 为 `-GalleryResolution native`），接受原生尺寸，包括1086×1448，不设最短边门槛；仍检查可解码及品类画幅，实际清晰度由视觉复核。仅用户本次明确要求严格高分辨率时使用 `high`，检查短边严格大于2000px。为兼容旧调用，脚本省略参数仍为 `high`；技能默认调用必须明确传 `native`。JSON 的 `gallery_resolution` 记录本次模式，A+ 为 `null`。
+
+A+ 按 [A+ 双端图片流程](aplus-images.md) 传入 `-AplusLayout desktop/mobile`（Python 为 `--aplus-layout`），精确检查桌面1464×600、移动600×450，以及文件小于2,000,000字节、双向DPI至少72。图库分辨率参数对A+无效，不放宽A+要求。
 
 | 字段 | 含义 | 不通过的例子 |
 |---|---|---|
-| `pixel_passed` | 所有本次文件可解码，短边严格大于 2000px，非时尚方图/时尚竖图 | 1086×1448、短边恰好 2000、非时尚长方图 |
+| `pixel_passed` | 所有本次文件可解码，非时尚方图/时尚竖图；`native`接受原生尺寸，`high`另查短边大于2000px | `native`仍拒绝非时尚长方图；1086×1448时尚竖图在`native`可通过，在`high`不通过 |
 | `delivery_passed` | 数量正确，无相同文件或相同解码像素凑数，真实 JPEG/PNG 且后缀匹配、RGB 兼容色彩、可验证 sRGB 配置/声明、无透明像素、非动画；指定 AI 人物图的双字段标签正确 | 少图、重复像素、PNG 冒用 .jpg、BMP、CMYK、无色彩声明、损坏或非 sRGB 的 ICC、透明 PNG、动画、人物图披露标签缺失 |
 | `passed` | 上述两项均通过 | 只像素合格仍不能报整体文件检查通过 |
 

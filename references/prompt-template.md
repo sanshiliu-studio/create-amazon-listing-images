@@ -34,7 +34,7 @@ No unauthorized third-party trademarks, copyrighted characters, or celebrity lik
 No watermark, promotional badges, prices, ratings, fabricated claims, or invented accessories.
 ```
 
-`Output target` 是请求，不是工具能力或实际像素的证明。图库整套先验证第一张真实像素；A+ 双端先完成首组的桌面与移动实际文件，两端像素、文件、内容及可读性检查均通过后才批量制作其余组。指定单端修订只预检该端。失败时按 SKILL.md 的上限纠正，不靠反复追加 4K 或像素数字重试。将首张/首组双端的实测尺寸、检查状态、尝试次数和本次完成范围记在 `prompts.md`，后续同类能力限制沿用该结论。
+`Output target` 是优先请求，不是工具能力或实际像素的证明。图库默认接受原生规格，包括1086×1448，读取首张实际尺寸并核对画幅、商品和清晰度后直接继续整套；不再询问是否接受预览，不因未超过2000px而重试，也不把1086×1448写死成工具永久上限。图库验收明确用 `--gallery-resolution native`，只有本次另行指定严格高分辨率时用 `high`。A+ 首组双端仍须按1464×600和600×450分别通过文件、内容及可读性检查，再批量制作；指定单端修订只预检该端。A+或另行指定的硬指标失败按 SKILL.md 上限纠正。将实测尺寸、采用的验收模式和范围记在 `prompts.md`，不把原生输出报告为已达到高分辨率目标。
 
 在生成记录中另列本图是否含 AI 人物/人体；提示词不要求把 `contains-synthetic-performer` 画在画面上。该关键词在最终导出后按 [AI 人物元数据标记](synthetic-performer.md) 写入文件属性并读回检查。
 
