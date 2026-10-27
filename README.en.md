@@ -50,7 +50,7 @@ This is a **revision preview**. Gallery image 01 and A05 desktop still need surf
 
 ## Key rules
 
-- **Product fidelity:** review every final image against the actual SKU references and confirmed facts. Do not invent parts, accessories, dimensions, features, or performance claims.
+- **Product fidelity across all categories:** inspect every generated or edited product image against actual SKU photos and confirmed facts, regardless of image type, batch size, or revision scope. Check close-up texture, structure, accessories, dimensions, and implied features; verify each SKU separately in multi-product scenes. Review desktop and mobile separately and recheck revised exports. Correct discrepancies before acceptance; unchecked, unverified, or failed images do not count as completed deliverables. Do not substitute generic concept products when actual-product fidelity is required.
 - **Consistent art direction:** gallery and A+ records reference the same visual specification. A+ uses independently designed compositions.
 - **Human lifestyle scenes:** a complete gallery includes at least 2 distinct photorealistic human-use scenes, normally images 03 and 07. Faces remain outside the frame. AI-generated people are not described as actual product photography.
 - **Numeric clarity:** use Arabic digits throughout image copy, captions, alt text, and new prompts, including values below 10. Examples: `1.50 in / 3.8 cm`, `2 pieces`, `Step 1`.
