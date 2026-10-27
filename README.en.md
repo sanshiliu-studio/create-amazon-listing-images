@@ -32,6 +32,22 @@ A Codex skill for planning, generating, revising, and reviewing Amazon US produc
 
 New production requests include both sets unless the user explicitly limits the scope. Partial revisions preserve unrelated images. Native gallery resolution is already accepted: continue without repeatedly asking for preview approval or automatically upscaling. Missing evidence, failed A+ requirements, or separately requested hard requirements remain visible as incomplete items.
 
+## Example gallery
+
+### Burgundy belt with a gold-tone buckle
+
+**7 gallery images + 6 desktop/mobile A+ pairs: 19 images in total.**
+
+<p>
+  <a href="examples/burgundy-belt/"><img src="examples/burgundy-belt/images/01.jpg" width="30%" alt="Burgundy belt main-image draft; surface texture still needs calibration"></a>
+  <a href="examples/burgundy-belt/"><img src="examples/burgundy-belt/images/03.jpg" width="30%" alt="Burgundy belt styled with jeans"></a>
+  <a href="examples/burgundy-belt/"><img src="examples/burgundy-belt/images/07.jpg" width="30%" alt="Burgundy belt styled with a dress"></a>
+</p>
+
+[View all 19 images and download instructions](examples/burgundy-belt/) · [Interactive HTML file](examples/burgundy-belt/index.html)
+
+This is a **revision preview**. Gallery image 01 and A05 desktop still need surface-texture calibration; final product fidelity and platform approval are not established. The original review notes are retained. Download the repository to open the interactive HTML; GitHub's file view displays source code.
+
 ## Key rules
 
 - **Product fidelity:** review every final image against the actual SKU references and confirmed facts. Do not invent parts, accessories, dimensions, features, or performance claims.
@@ -119,7 +135,7 @@ These checks do not recognize product redesigns, true performance, human-scene q
 python -B -X utf8 -m unittest discover -s tests -v
 ```
 
-Personal product images, generation outputs, and customer records are excluded. Local `outputs/` is ignored.
+Only explicitly selected public generated examples are included under `examples/`. Personal product photographs, customer records, and other generation outputs and working records remain local. The local `outputs/` directory is ignored.
 
 These export sizes and creative rules are project defaults, not a claim that every Amazon module has the same requirements. Current category rules and platform review remain separate. This independent project is not endorsed by Amazon or OpenAI.
 

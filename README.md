@@ -37,6 +37,22 @@
 
 没有限定范围的新制作任务，默认同时制作2套。明确要求只做图库、只做A+、补图、单张或局部修改时，仅执行指定范围。图库已默认接受原生分辨率，不再重复询问是否接受预览，也不为凑像素自动放大；缺资料、A+或另行指定的硬指标无法完成时如实记录未完成项。
 
+## 示例预览
+
+### 酒红金扣女士腰带
+
+**7 张图库＋6 组 A+ 双端，共19张**，展示从白底主图、真人穿搭到 A+ 两端的成套视觉。
+
+<p>
+  <a href="examples/burgundy-belt/"><img src="examples/burgundy-belt/images/01.jpg" width="30%" alt="酒红腰带白底主图示例，皮面细纹待校准"></a>
+  <a href="examples/burgundy-belt/"><img src="examples/burgundy-belt/images/03.jpg" width="30%" alt="酒红腰带牛仔裤穿搭场景示例"></a>
+  <a href="examples/burgundy-belt/"><img src="examples/burgundy-belt/images/07.jpg" width="30%" alt="酒红腰带连衣裙穿搭场景示例"></a>
+</p>
+
+[查看全部19张与下载方法](examples/burgundy-belt/) · [交互预览文件](examples/burgundy-belt/index.html) · [更多示例](examples/)
+
+此案例为**修订预览**，图库01和A05桌面版仍有皮面细纹待校准；保留原检查记录，不代表已通过最终实物保真验收或平台审核。交互HTML需下载仓库后打开，GitHub文件页显示源码。
+
 ## 为什么做成一套
 
 | 关注点 | 技能如何处理 |
@@ -170,7 +186,7 @@ python -B -X utf8 scripts/verify_images.py --category other --aplus-layout mobil
 python -B -X utf8 -m unittest discover -s tests -v
 ```
 
-仓库不包含个人商品实拍、生成结果或客户资料；本地 `outputs/` 默认忽略。用户自行生成的文件留在自己的项目中。
+仓库仅在 `examples/` 收录作者明确选择公开的生成案例；个人商品实拍、客户资料及其他生成结果和工作记录仍保留在本地，`outputs/` 默认忽略。用户自行生成的文件留在自己的项目中。
 
 ## 开源许可证
 

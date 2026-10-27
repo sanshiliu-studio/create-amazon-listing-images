@@ -1,4 +1,4 @@
-# Product references, generated images and per-product working records stay local.
+# Product records stay local; explicitly selected public cases live under /examples/.
 /outputs/
 /__pycache__/
 **/__pycache__/
