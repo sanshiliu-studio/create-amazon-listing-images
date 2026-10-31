@@ -42,6 +42,14 @@ No watermark, promotional badges, prices, ratings, fabricated claims, or invente
 
 提示词写出商品约束不代表实际成图已遵守。逐张生成后先核对商品；最后导出后按 [产品一致性与功能卖点终检](product-consistency.md) 查看最终文件与实拍/事实来源，记录外观和卖点是否被改动，修正后重新检查。后续图片不得把首张 AI 图的错误当作新的商品标准。
 
+## 皮带白底主图
+
+皮带图库 01 的构图字段默认使用以下内容，并同时填入本款实拍来源与不可改动细节；仅主图使用，不套到其他图片。完整规则见 [皮带白底主图默认构图](../SKILL.md#皮带白底主图默认构图)。
+
+```text
+Belt MAIN composition: Arrange the actual belt in a natural, horizontally elongated oval loop. Photograph from the front at a slightly elevated angle, showing the front of the buckle, the open loop and the rear arc. Place the buckle at the front center, facing the camera. Extend the tail along the front toward the image right only if the actual threading direction permits. Preserve the real fastening mechanism, keepers, holes, thickness and proportions. Keep the whole belt visible, horizontally centered and slightly below the canvas center, with balanced margins and an appropriate product scale. Use a pure white RGB 255,255,255 background, soft studio lighting and a subtle contact shadow. No added text, people or props. Transfer only the reference arrangement and camera angle; reproduce all product details from the actual SKU photos, never the composition reference's brand, decorative buckle, color or texture. Do not mirror branding or deform the belt to force the pose.
+```
+
 ## 尺寸图
 
 明确测量对象、方向与端点，使用同一批真实数据。先锁定实际应显示的数字、精度和单位，再把完整文字填入 `Text (verbatim)` 与 `Numeric text (verbatim)`，例如 `Strap Width: 1.50 in / 3.8 cm`、`Height: 7.9 in / 20 cm`；示例数值不能替代本款资料。
